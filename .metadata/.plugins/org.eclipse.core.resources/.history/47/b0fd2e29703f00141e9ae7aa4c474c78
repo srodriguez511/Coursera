@@ -1,0 +1,5 @@
+package com.scala.helloworld
+
+object efwaf {
+  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+}
