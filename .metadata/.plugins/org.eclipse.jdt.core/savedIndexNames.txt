@@ -1,9 +1,0 @@
-INDEX VERSION 1.126+F:\Coursera\.metadata\.plugins\org.eclipse.jdt.core
-2141450616.index
-1451691174.index
-642142379.index
-2292053920.index
-977184355.index
-203954243.index
-384641357.index
-1117855816.index
