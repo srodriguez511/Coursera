@@ -1,6 +1,6 @@
-package com.algorithms.week2;
-
-import com.algorithms.std.*;
+//package com.algorithms.week2;
+//
+//import com.algorithms.std.*;
 
 public class Subset {
 	public static void main(String[] args) {

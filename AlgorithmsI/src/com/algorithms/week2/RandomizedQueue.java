@@ -1,6 +1,6 @@
-package com.algorithms.week2;
-
-import com.algorithms.std.*;
+//package com.algorithms.week2;
+//
+//import com.algorithms.std.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -57,8 +57,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			resize(2 * _array.length); // double size of array if necessary
 		}
 
-		_lastItemIndex++;
-		_array[_size++] = item; // add item
+		_size++;
+		_array[_lastItemIndex++] = item; // add item
 	}
 
 	// delete and return a random item
@@ -67,8 +67,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			throw new NoSuchElementException();
 		}
 
-		int randomIndex = StdRandom.uniform(_lastItemIndex);
-		Item item = _array[randomIndex];
+		Item item = null; 
+		int randomIndex = 0;
 
 		while (item == null) {
 			randomIndex = StdRandom.uniform(_lastItemIndex);
@@ -77,10 +77,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 		_array[randomIndex] = null;
 
-		if (_size > 0 && _size == _array.length / 4) {
+		if ((_size > 0) && (_size == (_array.length / 4))) {
 			resize(_array.length / 2);
 		}
 
+		_size--;
 		return item;
 	}
 
@@ -154,6 +155,22 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	// unit testing
 	public static void main(String[] args) {
-
+		RandomizedQueue<Integer> test = new RandomizedQueue<Integer>();
+		
+		Integer times = 1000000;
+		
+		for(int i = 0; i < times; i++){
+			test.enqueue(i);
+		}
+		
+		for(int j = 0; j < times; j++){
+			test.dequeue();
+		}
+		
+		for(int l = 0; l < times; l++){
+			test.enqueue(l);
+		}
+		
+		StdOut.println("DONE");
 	}
 }

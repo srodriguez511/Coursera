@@ -1,5 +1,5 @@
-package com.algorithms.week2;
-import com.algorithms.std.*;
+//package com.algorithms.week2;
+//import com.algorithms.std.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -38,19 +38,15 @@ public class Deque<Item> implements Iterable<Item> {
 			throw new NullPointerException();
 		}
 
-		Node newNode = new Node();
-		newNode._item = item;
-		newNode._next = null;
-		newNode._prev = null;
+		Node previousHead = _head;
+		_head = new Node();
+		_head._item = item;
+		_head._next = previousHead;
 
-		// adding first item
-		if (_head == null) {
-			_head = newNode;
-			_tail = newNode;
+		if (isEmpty()) {
+			_tail = _head;
 		} else {
-			Node oldFirst = _head;
-			_head = newNode;
-			newNode._next = oldFirst;
+			previousHead._prev = _head;
 		}
 
 		_size++;
@@ -62,19 +58,15 @@ public class Deque<Item> implements Iterable<Item> {
 			throw new NullPointerException();
 		}
 
-		Node newNode = new Node();
-		newNode._item = item;
-		newNode._next = null;
+		Node oldTail = _tail;
+		_tail = new Node();
+		_tail._item = item;
+		_tail._prev = oldTail;
 
-		// adding first item
-		if (_head == null) {
-			_head = newNode;
-			_tail = newNode;
+		if (isEmpty()) {
+			_head = _tail;
 		} else {
-			Node oldLast = _tail;
-			_tail = newNode;
-			oldLast._next = newNode;
-			newNode._prev = oldLast;
+			oldTail._next = _tail;
 		}
 
 		_size++;
@@ -86,19 +78,17 @@ public class Deque<Item> implements Iterable<Item> {
 			throw new java.util.NoSuchElementException();
 		}
 
-		Item item = _head._item; // save item to return
-
-		if (_size == 1) {
-			_head = null;
+		Item item = _head._item;
+		_head = _head._next;
+		_size--;
+		
+		if (isEmpty()) {
 			_tail = null;
 		} else {
-			_head = _head._next;
 			_head._prev = null;
 		}
-
-		_size--;
-
-		return item; // return the saved item
+		
+		return item;
 	}
 
 	// delete and return the item at the end
@@ -107,19 +97,17 @@ public class Deque<Item> implements Iterable<Item> {
 			throw new java.util.NoSuchElementException();
 		}
 
-		Item item = _tail._item; // save item to return
-
-		if (_size == 1) {
-			_head = null;
-			_tail = null;
-		} else {
-			_tail = _tail._prev;
-			_tail._next = null;
-		}
-
+		Item item = _tail._item;
+		_tail = _tail._prev;
 		_size--;
 
-		return item; // return the saved item
+		if (isEmpty()) {
+			_head = null;
+		} else {
+			_tail._next = null;
+		}
+		
+		return item;
 	}
 
 	// return an iterator over items in order from front to end
@@ -181,70 +169,10 @@ public class Deque<Item> implements Iterable<Item> {
 			int element = itr.next();
 			StdOut.print(element + ", ");
 		}
-		StdOut.println();
 
-		first.removeFirst();
+		first.removeLast();
 		StdOut.println(first.isEmpty());
 		StdOut.println(first.size());
-
-		first.removeFirst();
-		StdOut.println(first.isEmpty());
-		StdOut.println(first.size());
-
-		first.removeFirst();
-		StdOut.println(first.isEmpty());
-		StdOut.println(first.size());
-
-		first.removeFirst();
-		StdOut.println(first.isEmpty());
-		StdOut.println(first.size());
-
-		StdOut.println("========================");
-
-		Deque<Integer> last = new Deque<Integer>();
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		last.addLast(5);
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		last.addLast(6);
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		last.addLast(7);
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		last.addLast(8);
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-		
-		Iterator<Integer> itr2 = last.iterator();
-		while (itr2.hasNext()) {
-			int element = itr2.next();
-			StdOut.print(element + ", ");
-		}
-		StdOut.println();
-
-		last.removeLast();
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		last.removeLast();
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		last.removeLast();
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		last.removeLast();
-		StdOut.println(last.isEmpty());
-		StdOut.println(last.size());
-
-		StdOut.println("========================");
 
 	}
 
