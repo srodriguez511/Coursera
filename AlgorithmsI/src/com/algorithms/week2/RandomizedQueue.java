@@ -57,6 +57,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			resize(2 * _array.length); // double size of array if necessary
 		}
 
+		_lastItemIndex++;
 		_array[_size++] = item; // add item
 	}
 
